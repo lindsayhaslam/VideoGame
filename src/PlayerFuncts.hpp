@@ -30,11 +30,11 @@ public:
     
     void initialize()
     {
-        if (!playerTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Dino.png"))
+        if (!playerTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino.png"))
      {
         exit(0);
      }
-        else if(playerTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Dino.png"))
+        else if(playerTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino.png"))
         {
         playerSprite.setTexture(playerTexture);
         isJumping = false;

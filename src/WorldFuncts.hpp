@@ -62,7 +62,7 @@ public:
 
         }
         dino.update();
-        score.update();
+        score.update(0);
     }
     
     void draw(sf::RenderWindow& window)

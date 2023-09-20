@@ -10,35 +10,46 @@
 
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
+#include <stdlib.h>
 
 class Score
 {
 public:
     sf::Text scoreText;
     sf::Font scoreFont;
-    int score=0;
-    
+    int points=0;
+    int numTicksSinceLastPoint = 0;
+    const int numTicksPerPoint = 1000;
     
     Score()
     {
     }
     
     void initialize()
+    {
+        if (!scoreFont.loadFromFile("/Users/corinnejones/VideoGame/build/ARIAL.TTF"))
         {
-            scoreText.setFont(scoreFont);
+            exit(0);
+        }
+        if (scoreFont.loadFromFile ("/Users/corinnejones/VideoGame/build/ARIAL.TTF"))
+        {
             scoreText.setCharacterSize(30);
             scoreText.setPosition(300.f, 500.f);
             scoreText.setFillColor(sf::Color::Black);
             scoreText.setString("Score: ");
+            numTicksSinceLastPoint = 0;
         }
-
-    void update()
-    {
-        
-        score++;
-//        std::this_thread::sleep_for(std::chrono::seconds(1));
-        scoreText.setString(std::to_string(score));
     }
+    
+    void update(int delta)
+        {
+            numTicksSinceLastPoint += delta;
+            if (numTicksSinceLastPoint >= numTicksPerPoint) {
+                points++;
+                scoreText.setString(std::to_string(points));
+                numTicksSinceLastPoint = 0;
+            }
+        }
     
     void draw(sf::RenderWindow& window)
     {
