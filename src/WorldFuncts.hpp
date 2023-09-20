@@ -29,11 +29,11 @@ public:
     //Initialize rectangles with different initial positions
     void initialize(){
         
-        if (!buildingTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Building.png"))
+        if (!buildingTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Building.png"))
      {
         exit(0);
      }
-        else if(buildingTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Building.png"))
+        else if(buildingTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Building.png"))
         {
             buildingSprite.setTexture(buildingTexture);
         }
@@ -48,7 +48,7 @@ public:
     }
     //RECTANGLES
           //Move and draw the rectangles
-    void update (int deltaTime)
+    void update ()
     {
         for (int i=0; i <numRectangles; ++i)
         {

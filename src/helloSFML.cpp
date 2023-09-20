@@ -85,9 +85,9 @@ int main()
         auto nowMS = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
 
         // get the delta time from the last update
-        int deltaTimeMS = (nowMS - lastUpdateTick).count();
+//        int deltaTimeMS = (nowMS - lastUpdateTick).count();
         
-        world.update(deltaTimeMS);
+        world.update();
         
         // clear the window with white color
         window.clear();
