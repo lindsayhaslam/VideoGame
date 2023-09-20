@@ -10,12 +10,14 @@
 
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
+#include <stdlib.h>
 
 class Player
 {
 public:
     //PLAYER
-    sf::CircleShape playerShape{30.f};
+    sf::Texture playerTexture;
+    sf::Sprite playerSprite;
     //Jump variables
     bool isJumping = false;
     float jumpHeight = 450.0f;
@@ -28,13 +30,20 @@ public:
     
     void initialize()
     {
-        
+        if (!playerTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Dino.png"))
+     {
+        exit(0);
+     }
+        else if(playerTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Dino.png"))
+        {
+        playerSprite.setTexture(playerTexture);
         isJumping = false;
         jumpHeight = 450.0f;
         gravity = .4f;
-        playerShape.setFillColor(sf::Color(243, 100, 162));
-        playerShape.setPosition(250.f, 480.f);
-        playerShape.setRadius(30.f);
+        //playerSprite.setFillColor(sf::Color(243, 100, 162));
+        playerSprite.setPosition(250.f, 480.f);
+        playerSprite.setScale(0.4f, 0.4f);
+        }
             
     }
 
@@ -51,7 +60,7 @@ public:
                if (isJumping)
                {
                    //Moves player upwards
-                   playerShape.move(0.f, -gravity);
+                   playerSprite.move(0.f, -gravity);
                    jumpHeight -= gravity;
                    
                    if (jumpHeight <= 0)
@@ -61,16 +70,17 @@ public:
                        gravity = 0.06f;
                    }
                }
-               else if (playerShape.getPosition().y < 480.f)
+               else if (playerSprite.getPosition().y < 480.f)
                {
-                   playerShape.move(0.f, gravity);
+                   playerSprite.move(0.f, gravity);
                }
         
     }
     
+    //Reference to the window in main
     void draw(sf::RenderWindow& window)
     {
-        window.draw(playerShape);
+        window.draw(playerSprite);
     }
     
 
