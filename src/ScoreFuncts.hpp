@@ -27,11 +27,11 @@ public:
     
     void initialize()
     {
-        if (!scoreFont.loadFromFile("../art/ARIAL.TTF"))
+        if (!scoreFont.loadFromFile("/Users/corinnejones/VideoGame/build/ARIAL.TTF"))
         {
             exit(0);
         }
-        if (scoreFont.loadFromFile ("../art/ARIAL.TTF"))
+        if (scoreFont.loadFromFile ("/Users/corinnejones/VideoGame/build/ARIAL.TTF"))
         {
             scoreText.setCharacterSize(30);
             scoreText.setPosition(300.f, 500.f);

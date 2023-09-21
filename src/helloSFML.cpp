@@ -49,7 +49,7 @@ int main()
 {
     Score playerScore;
     World world;
-    
+        
     // create the window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dinoskater!");
     
@@ -88,6 +88,8 @@ int main()
 //        int deltaTimeMS = (nowMS - lastUpdateTick).count();
         
         world.update();
+        
+        //if world.isplayerdead do the end of game logic. 
         
         // clear the window with white color
         window.clear();

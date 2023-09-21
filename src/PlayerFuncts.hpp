@@ -83,6 +83,11 @@ public:
         window.draw(playerSprite);
     }
     
+    bool doesCollide(sf::FloatRect otherRect){
+        
+        return playerSprite.getGlobalBounds().intersects(otherRect);
+    }
+    
 
     
 };

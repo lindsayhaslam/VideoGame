@@ -13,17 +13,18 @@
 #include "PlayerFuncts.hpp"
 #include "ScoreFuncts.hpp"
 #include <stdlib.h>
+//everywhere it has the numRectangles it is iterating twice and doing two times the number of things to buildingSprite.
 
 class World
 {
 public:
     //RECTANGLE VARIABLES
     float moveSpeed = 0.04f;
-    #define numRectangles 2
+    #define numRectangles 1
     sf::Texture buildingTexture;
     sf::Sprite buildingSprite;
     //sf::RectangleShape rectangles[numRectangles];
-    Player dino;
+    Player player;
     Score score;
     
     //Initialize rectangles with different initial positions
@@ -43,7 +44,7 @@ public:
             buildingSprite.setScale(.5f, .5f); // Set width and height
             buildingSprite.setPosition(800.0f + i * 400.0f, 437.0f); // Set position (x, y)
         }
-        dino.initialize();
+        player.initialize();
         score.initialize();
     }
     //RECTANGLES
@@ -61,7 +62,12 @@ public:
             }
 
         }
-        dino.update();
+        player.update();
+        
+        if (player.doesCollide(buildingSprite.getGlobalBounds())) {
+            buildingSprite.setPosition(0,0);
+        }
+        
         score.update(0);
     }
     
@@ -71,7 +77,7 @@ public:
             //draw rectangle along the way
             window.draw(buildingSprite);
         }
-        dino.draw(window);
+        player.draw(window);
         score.draw(window);
     }
 };
