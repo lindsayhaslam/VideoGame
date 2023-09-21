@@ -8,22 +8,38 @@
 #include "PlayerFuncts.hpp"
 
 
-void Player::initialize(){
-    if (!playerTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino.png"))
- {
-    exit(0);
- }
-    else
-    {
-    playerSprite.setTexture(playerTexture);
+void Player::initialize()
+{
+    if (!purpleTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino.png")) {
+        std::cerr << "Failed to load playerTexture" << std::endl;
+        exit(1);
+    }
+
+    if (!orangeTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino1.png")) {
+        std::cerr << "Failed to load orangeTexture" << std::endl;
+        exit(1);
+    }
+
+    if (!greenTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino2.png")) {
+        std::cerr << "Failed to load greenTexture" << std::endl;
+        exit(1);
+    }
+    else {
+    playerTextures.push_back(purpleTexture);
+    playerTextures.push_back(orangeTexture);
+    playerTextures.push_back(greenTexture);
+    playerSprite.setTexture(playerTextures[0]);
     isJumping = false;
     jumpHeight = 475.0f;
     gravity = .4f;
     playerSprite.setPosition(250.f, 480.f);
     playerSprite.setScale(0.4f, 0.4f);
+ 
+        
     }
         
 }
+
 
 void Player::update()
     {
@@ -76,3 +92,5 @@ bool Player::doesCollide(sf::FloatRect otherRect)
     
     return playerSprite.getGlobalBounds().intersects(otherRect);
 }
+
+

@@ -72,9 +72,10 @@ void World::updateCandy (int deltatime)
 {
 //random number generator between two positions, then inser into the y
     for (int i=0; i <numCandies; ++i)
-    {
+    {   std::srand(time(0));
         std::random_device rd;
         std::mt19937 gen(rd());
+        
         double lowerBound = 400.0;
         double upperBound = 100.0;
         std::uniform_real_distribution<int> distribution(lowerBound, upperBound);
@@ -90,8 +91,9 @@ void World::updateCandy (int deltatime)
     }
     
     if (player.doesCollide(candySprite.getGlobalBounds())) {
-        candySprite.rotate(25);
-     
+    
+        player.currentTextureIndex = (player.currentTextureIndex + 1) % player.playerTextures.size();
+            player.playerSprite.setTexture(player.playerTextures[player.currentTextureIndex]);
     }
      
 }
@@ -102,9 +104,7 @@ void World::draw(sf::RenderWindow& window)
             //draw rectangle along the way
             window.draw(buildingSprite);
         }
-
         player.draw(window);
-
     }
 
 void World::drawCandy(sf::RenderWindow& window)

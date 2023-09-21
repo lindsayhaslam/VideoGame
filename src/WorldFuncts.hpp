@@ -15,6 +15,9 @@
 #include <stdlib.h>
 #include <random>
 #include <ctime>
+#include <vector>
+#include <iostream>
+#include <cstdlib>
 //everywhere it has the numRectangles it is iterating twice and doing two times the number of things to buildingSprite.
 
 class World

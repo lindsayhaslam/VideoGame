@@ -54,8 +54,7 @@ void Score::drawGameOverText(sf::RenderWindow& window)
     window.draw(gameOverText);
 }
 
-int Score::updatePoints()
-{
-    return (points*=10);
-    
-}
+//int Score::updatePoints();
+//{
+//    return (points*=10);
+//}
