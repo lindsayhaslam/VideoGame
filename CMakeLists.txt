@@ -25,7 +25,7 @@ cmake_minimum_required(VERSION 3.15)
 project(testSFML)
 
 #the project contains an executable named testSFML that uses the following cpp files
-add_executable(testSFML src/helloSFML.cpp src/PlayerFuncts.cpp src/PlayerFuncts.hpp src/ScoreFuncts.cpp src/ScoreFuncts.hpp src/WorldFuncts.cpp src/WorldFuncts.hpp)
+add_executable(testSFML src/helloSFML.cpp src/PlayerFuncts.cpp src/PlayerFuncts.hpp src/ScoreFuncts.cpp src/ScoreFuncts.hpp src/WorldFuncts.cpp src/WorldFuncts.hpp src/TestFuncts.cpp src/TestFuncts.hpp)
 
 
 
