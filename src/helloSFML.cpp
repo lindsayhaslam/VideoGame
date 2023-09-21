@@ -52,6 +52,7 @@ int main()
 
 
     world.initialize();
+    world.initializeCandy();
     score.initialize();
     score.initializeGameOverFont();
     auto lastUpdateTick = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
@@ -78,6 +79,7 @@ int main()
         lastUpdateTick = nowMS;
 
         world.update(deltaTimeMS);
+        world.updateCandy(deltaTimeMS);
         score.update(deltaTimeMS);
         
          if (world.isPlayerDead())
@@ -112,6 +114,7 @@ int main()
                 }
             }
             world.initialize();
+            world.initializeCandy();
             score.initialize();
             score.initializeGameOverFont();
         }
@@ -122,6 +125,7 @@ int main()
         window.draw(gradient);
 
         world.draw(window);
+        world.drawCandy(window); 
         score.draw(window);
         
         window.display();

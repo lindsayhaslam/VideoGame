@@ -32,6 +32,9 @@ public:
     
     void drawGameOverText(sf::RenderWindow& window);
     
+    int updatePoints();
+
+    
 };
 
 #endif /* ScoreFuncts_hpp */
