@@ -19,73 +19,26 @@ class World
 {
 public:
     //RECTANGLE VARIABLES
-    float moveSpeed = 0.06f;
-    #define numRectangles 1
+    float moveSpeed=0.06;
+    int numRectangles=1;
     sf::Texture buildingTexture;
     sf::Sprite buildingSprite;
     bool playerDead=false;
     //sf::RectangleShape rectangles[numRectangles];
     Player player;
     //Score score;
+    sf::RectangleShape road;
     
     //Initialize rectangles with different initial positions
-    void initialize(){
-        
-        if (!buildingTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Building.png"))
-     {
-        exit(0);
-     }
-        else if(buildingTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Building.png"))
-        {
-            buildingSprite.setTexture(buildingTexture);
-        }
-            
-        for (int i=0; i < numRectangles; ++i)
-        {
-            buildingSprite.setScale(.5f, .5f); // Set width and height
-            buildingSprite.setPosition(800.0f + i * 400.0f, 437.0f); // Set position (x, y)
-        }
-        player.initialize();
-        playerDead=false;
-    }
+    void initialize();
+
     //RECTANGLES
           //Move and draw the rectangles
-    void update (int deltatime)
-    {
-        for (int i=0; i <numRectangles; ++i)
-        {
-            buildingSprite.move(-moveSpeed, 0);
-            //Check to see if rectangle has moved off screen
-            if (buildingSprite.getPosition().x + buildingSprite.getScale().x < 0)
-            {
-                //If so, move it back to edge 800.
-                buildingSprite.setPosition(800.f, 437.f);
-            }
-
-        }
-        player.update();
-        
-        if (player.doesCollide(buildingSprite.getGlobalBounds())) {
-//            buildingSprite.setPosition(0, 0);
-            playerDead=true;
-        }
-         
-    }
+    void update (int deltatime);
     
-    void draw(sf::RenderWindow& window)
-    {
-        for (int i=0; i<numRectangles; ++i) {
-            //draw rectangle along the way
-            window.draw(buildingSprite);
-        }
-        player.draw(window);
-
-    }
+    void draw(sf::RenderWindow& window);
     
-    bool isPlayerDead()
-    {
-        return playerDead;
-    }
+    bool isPlayerDead(); 
     
 };
 

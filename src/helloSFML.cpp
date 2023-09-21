@@ -7,11 +7,29 @@
 #include "ScoreFuncts.hpp"
 #include "WorldFuncts.hpp"
 
+void backgroundGradient()
+{
+    sf::VertexArray gradient(sf::Quads, 4);
+
+        // Define the colors for the gradient
+        gradient[0].position = sf::Vector2f(0, 0);
+        gradient[1].position = sf::Vector2f(800, 0);
+        gradient[2].position = sf::Vector2f(800, 600);
+        gradient[3].position = sf::Vector2f(0, 600);
+
+
+        gradient[0].color = sf::Color(173, 216, 230);
+        gradient[1].color = sf::Color(173, 216, 230);
+        gradient[2].color = sf::Color::White;
+        gradient[3].color = sf::Color::White;
+}
+
 int main()
 {
     Score score;
     World world;
     Player player;
+    
         
     // create the window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dinoskater!");
@@ -61,7 +79,8 @@ int main()
 
         world.update(deltaTimeMS);
         score.update(deltaTimeMS);
-        if (world.isPlayerDead())
+        
+         if (world.isPlayerDead())
         {
             score.drawGameOverText(window);
             window.display();
@@ -83,7 +102,7 @@ int main()
 
                     if (event.type == sf::Event::KeyPressed)
                     {
-                        if (event.key.code == sf::Keyboard::RShift || event.key.code == sf::Keyboard::LShift)
+                        if (event.key.code == sf::Keyboard::RShift || event.key.code ==sf::Keyboard::LShift)
                         {
 
                             isGameOver = false; // Resume the game
