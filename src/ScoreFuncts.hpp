@@ -16,7 +16,8 @@ class Score
 {
 public:
     sf::Text scoreText;
-    sf::Font scoreFont;
+    sf::Text gameOverText;
+    sf::Font font;
     int points=0;
     int numTicksSinceLastPoint = 0;
     const int numTicksPerPoint = 1000;
@@ -27,18 +28,28 @@ public:
     
     void initialize()
     {
-        if (!scoreFont.loadFromFile("/Users/corinnejones/VideoGame/build/ARIAL.TTF"))
+        if (!font.loadFromFile("/Users/corinnejones/VideoGame/build/ARIAL.TTF"))
         {
             exit(0);
         }
-        if (scoreFont.loadFromFile ("/Users/corinnejones/VideoGame/build/ARIAL.TTF"))
-        {
+        else
+        {   scoreText.setFont(font);
             scoreText.setCharacterSize(30);
-            scoreText.setPosition(300.f, 500.f);
+            scoreText.setPosition(10.f, 10.f);
             scoreText.setFillColor(sf::Color::Black);
-            scoreText.setString("Score: ");
+            scoreText.setString("Score: 0");
             numTicksSinceLastPoint = 0;
         }
+        points = 0;
+    }
+    
+    void initializeGameOverFont()
+    {
+        gameOverText.setFont(font);
+        gameOverText.setString("        GAME OVER\nPress SHIFT to restart");
+        gameOverText.setCharacterSize(36);
+        gameOverText.setFillColor(sf::Color::Black);
+        gameOverText.setPosition(200, 200);
     }
     
     void update(int delta)
@@ -46,7 +57,7 @@ public:
             numTicksSinceLastPoint += delta;
             if (numTicksSinceLastPoint >= numTicksPerPoint) {
                 points++;
-                scoreText.setString(std::to_string(points));
+                scoreText.setString(std::string("Score: ") + std::to_string(points));
                 numTicksSinceLastPoint = 0;
             }
         }
@@ -54,6 +65,11 @@ public:
     void draw(sf::RenderWindow& window)
     {
         window.draw(scoreText);
+    }
+    
+    void drawGameOverText(sf::RenderWindow& window)
+    {
+        window.draw(gameOverText);
     }
     
 };

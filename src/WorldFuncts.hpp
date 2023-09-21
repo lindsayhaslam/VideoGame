@@ -19,13 +19,14 @@ class World
 {
 public:
     //RECTANGLE VARIABLES
-    float moveSpeed = 0.04f;
+    float moveSpeed = 0.06f;
     #define numRectangles 1
     sf::Texture buildingTexture;
     sf::Sprite buildingSprite;
+    bool playerDead=false;
     //sf::RectangleShape rectangles[numRectangles];
     Player player;
-    Score score;
+    //Score score;
     
     //Initialize rectangles with different initial positions
     void initialize(){
@@ -45,11 +46,11 @@ public:
             buildingSprite.setPosition(800.0f + i * 400.0f, 437.0f); // Set position (x, y)
         }
         player.initialize();
-        score.initialize();
+        playerDead=false;
     }
     //RECTANGLES
           //Move and draw the rectangles
-    void update ()
+    void update (int deltatime)
     {
         for (int i=0; i <numRectangles; ++i)
         {
@@ -65,10 +66,10 @@ public:
         player.update();
         
         if (player.doesCollide(buildingSprite.getGlobalBounds())) {
-            buildingSprite.setPosition(0,0);
+//            buildingSprite.setPosition(0, 0);
+            playerDead=true;
         }
-        
-        score.update(0);
+         
     }
     
     void draw(sf::RenderWindow& window)
@@ -78,9 +79,14 @@ public:
             window.draw(buildingSprite);
         }
         player.draw(window);
-        score.draw(window);
-    }
-};
 
+    }
+    
+    bool isPlayerDead()
+    {
+        return playerDead;
+    }
+    
+};
 
 #endif /* WorldFuncts_hpp */

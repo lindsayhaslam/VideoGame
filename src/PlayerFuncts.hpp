@@ -19,9 +19,10 @@ public:
     sf::Texture playerTexture;
     sf::Sprite playerSprite;
     //Jump variables
-    bool isJumping = false;
-    float jumpHeight = 450.0f;
-    float gravity = .4f;
+    bool isJumping;
+    float jumpHeight;
+    float gravity;
+    
     
     Player()
     {
@@ -40,7 +41,6 @@ public:
         isJumping = false;
         jumpHeight = 450.0f;
         gravity = .4f;
-        //playerSprite.setFillColor(sf::Color(243, 100, 162));
         playerSprite.setPosition(250.f, 480.f);
         playerSprite.setScale(0.4f, 0.4f);
         }
@@ -48,34 +48,44 @@ public:
     }
 
     void update()
-    {
-        //JUMP
-        //Check if space key is pressed
-               if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isJumping)
-               {
-                   //Set isJumping to true;
-                   isJumping = true;
-               }
-               
-               if (isJumping)
-               {
-                   //Moves player upwards
-                   playerSprite.move(0.f, -gravity);
-                   jumpHeight -= gravity;
-                   
-                   if (jumpHeight <= 0)
-                   {
-                       isJumping = false;
-                       jumpHeight = 200.0f;
-                       gravity = 0.06f;
-                   }
-               }
-               else if (playerSprite.getPosition().y < 480.f)
-               {
-                   playerSprite.move(0.f, gravity);
-               }
-        
-    }
+        {
+            // Check if the sprite is on the ground
+            bool isOnGround = (playerSprite.getPosition().y >= 480.f);
+
+            // JUMP
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isJumping && isOnGround)
+            {
+                // Set isJumping to true
+                isJumping = true;
+                isOnGround = false; // Mark that the sprite is no longer on the ground
+            }
+
+            if (isJumping)
+            {
+                // Moves player upwards
+                playerSprite.move(0.f, -gravity);
+                jumpHeight -= gravity;
+
+                if (jumpHeight <= 0)
+                {
+                    isJumping = false;
+                    jumpHeight = 425.0f;
+                    gravity = 0.08f;
+                }
+            }
+            else if (!isOnGround)
+            {
+                // If not jumping and not on the ground, apply gravity
+                playerSprite.move(0.f, gravity);
+            }
+            else
+            {
+                // If on the ground, reset jumpHeight and gravity
+                jumpHeight = 425.0f;
+                gravity = 0.08f;
+            }
+            
+        }
     
     //Reference to the window in main
     void draw(sf::RenderWindow& window)
@@ -83,10 +93,13 @@ public:
         window.draw(playerSprite);
     }
     
-    bool doesCollide(sf::FloatRect otherRect){
+    bool doesCollide(sf::FloatRect otherRect)
+    {
         
         return playerSprite.getGlobalBounds().intersects(otherRect);
     }
+
+    
     
 
     

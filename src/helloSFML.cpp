@@ -7,51 +7,16 @@
 #include "ScoreFuncts.hpp"
 #include "WorldFuncts.hpp"
 
-//class Game
-//{
-//    public:
-//        void initialize()
-//        {
-//            
-//        }
-//        
-//        void update(int n)
-//        {
-//            
-//        }
-//        
-//        void draw()
-//        {
-//            
-//        }
-//};
-
-// Initialze the absolute time in millesconds
-//auto lastUpdateTick = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
-
-// normal game initialization
-//        game.initialize();
-//        while (running) {
-//            // Get the current absolute time in millesonds
-//            auto nowMS = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
-//
-//            // get the delta time from the last update
-//            int deltaTimeMS = (nowMS - lastUpdateTick).count();
-//            game.update(deltaTimeMS);
-//            game.draw();
-//            // Set the last update to now
-//            lastUpdateTick = nowMS;
-//        }
-
-
-
 int main()
 {
-    Score playerScore;
+    Score score;
     World world;
+    Player player;
         
     // create the window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dinoskater!");
+    
+    bool isGameOver = false;
     
     sf::VertexArray gradient(sf::Quads, 4);
 
@@ -61,12 +26,18 @@ int main()
         gradient[2].position = sf::Vector2f(800, 600);
         gradient[3].position = sf::Vector2f(0, 600);
 
+
         gradient[0].color = sf::Color(173, 216, 230);
         gradient[1].color = sf::Color(173, 216, 230);
         gradient[2].color = sf::Color::White;
         gradient[3].color = sf::Color::White;
 
+
     world.initialize();
+    score.initialize();
+    score.initializeGameOverFont();
+    auto lastUpdateTick = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
+
     
     
     // run the program as long as the window is open
@@ -82,14 +53,49 @@ int main()
         }
         
         // Get the current absolute time in millesonds
-        auto nowMS = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
+        auto nowMS =std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
 
         // get the delta time from the last update
-//        int deltaTimeMS = (nowMS - lastUpdateTick).count();
-        
-        world.update();
-        
-        //if world.isplayerdead do the end of game logic. 
+        int deltaTimeMS = (nowMS - lastUpdateTick).count();
+        lastUpdateTick = nowMS;
+
+        world.update(deltaTimeMS);
+        score.update(deltaTimeMS);
+        if (world.isPlayerDead())
+        {
+            score.drawGameOverText(window);
+            window.display();
+
+            isGameOver = true;
+            // Additional game over logic (e.g., displaying a message)
+
+            // Game over loop
+                sf::Event event;
+                while (isGameOver)
+                {
+                    if(window.pollEvent(event))
+                    {
+                    if (event.type == sf::Event::Closed)
+                    {
+                        window.close();
+                        return 0;
+                    }
+
+                    if (event.type == sf::Event::KeyPressed)
+                    {
+                        if (event.key.code == sf::Keyboard::RShift || event.key.code == sf::Keyboard::LShift)
+                        {
+
+                            isGameOver = false; // Resume the game
+                            
+                        }
+                    }
+                }
+            }
+            world.initialize();
+            score.initialize();
+            score.initializeGameOverFont();
+        }
         
         // clear the window with white color
         window.clear();
@@ -97,6 +103,7 @@ int main()
         window.draw(gradient);
 
         world.draw(window);
+        score.draw(window);
         
         window.display();
     }
