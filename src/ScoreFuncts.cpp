@@ -28,7 +28,7 @@ void Score::initialize()
 void Score::initializeGameOverFont()
 {
     gameOverText.setFont(font);
-    gameOverText.setString("        GAME OVER\nPress SHIFT to restart");
+    gameOverText.setString("      GAME OVER\nPress SHIFT to restart");
     gameOverText.setCharacterSize(36);
     gameOverText.setFillColor(sf::Color::Black);
     gameOverText.setPosition(200, 200);
@@ -54,7 +54,7 @@ void Score::drawGameOverText(sf::RenderWindow& window)
     window.draw(gameOverText);
 }
 
-//int Score::updatePoints();
-//{
-//    return (points*=10);
-//}
+void Score::updatePoints()
+{
+    points+=10;
+}

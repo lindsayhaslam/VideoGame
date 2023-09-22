@@ -32,7 +32,7 @@ public:
     
     void drawGameOverText(sf::RenderWindow& window);
     
-//    int updatePoints();
+    void updatePoints();
 
     
 };

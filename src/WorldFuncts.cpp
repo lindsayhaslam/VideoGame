@@ -8,7 +8,7 @@
 #include "WorldFuncts.hpp"
 
 void World::initialize(){
-
+    std::srand(std::time(nullptr));
     if (!buildingTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Building.png"))
     {
     exit(0);
@@ -42,8 +42,9 @@ void World::initializeCandy(){
         
     for (int i=0; i < numCandies; ++i)
     {
+        candyPos=randCandyPos();
         candySprite.setScale(.2f, .2f); // Set width and height
-        candySprite.setPosition(800.0f + i * 400.0f, 100.0f); // Set position (x, y)
+        candySprite.setPosition(800.0f, candyPos); // Set position
     }
 }
 
@@ -51,6 +52,7 @@ void World::update (int deltatime)
 {
     for (int i=0; i <numRectangles; ++i)
     {
+        moveSpeed=randCandySpeed();
         buildingSprite.move(-moveSpeed, 0);
         //Check to see if rectangle has moved off screen
         if (buildingSprite.getPosition().x + buildingSprite.getScale().x < 0)
@@ -68,34 +70,32 @@ void World::update (int deltatime)
      
 }
 
-void World::updateCandy (int deltatime)
+bool World::updateCandy (int deltatime)
 {
 //random number generator between two positions, then inser into the y
     for (int i=0; i <numCandies; ++i)
-    {   std::srand(time(0));
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        
-        double lowerBound = 400.0;
-        double upperBound = 100.0;
-        std::uniform_real_distribution<int> distribution(lowerBound, upperBound);
-        int randomValue = distribution(gen);
+    {
+        float candyMoveSpeed=randCandySpeed();
         candySprite.move(-candyMoveSpeed, 0);
         //Check to see if rectangle has moved off screen
         if (candySprite.getPosition().x + candySprite.getScale().x < 0)
         {
+//            int max=500;
+//            int min=25;
+//            int randomValue=std::rand()/(float)RAND_MAX*(max-min)+min;
             //If so, move it back to edge 800.
-            candySprite.setPosition(800.0f, randomValue);
+            candySprite.setPosition(800.0f, randCandyPos());
         }
 
     }
     
     if (player.doesCollide(candySprite.getGlobalBounds())) {
-    
+        
         player.currentTextureIndex = (player.currentTextureIndex + 1) % player.playerTextures.size();
-            player.playerSprite.setTexture(player.playerTextures[player.currentTextureIndex]);
+        player.playerSprite.setTexture(player.playerTextures[player.currentTextureIndex]);
+        return true;
     }
-     
+    return false;
 }
 
 void World::draw(sf::RenderWindow& window)
