@@ -52,11 +52,12 @@ void World::update (int deltatime)
 {
     for (int i=0; i <numRectangles; ++i)
     {
-        moveSpeed=randCandySpeed();
+        
         buildingSprite.move(-moveSpeed, 0);
         //Check to see if rectangle has moved off screen
         if (buildingSprite.getPosition().x + buildingSprite.getScale().x < 0)
         {
+            moveSpeed=randCandySpeed();
             //If so, move it back to edge 800.
             buildingSprite.setPosition(800.f, 437.f);
         }
@@ -75,16 +76,14 @@ bool World::updateCandy (int deltatime)
 //random number generator between two positions, then inser into the y
     for (int i=0; i <numCandies; ++i)
     {
-        float candyMoveSpeed=randCandySpeed();
         candySprite.move(-candyMoveSpeed, 0);
         //Check to see if rectangle has moved off screen
         if (candySprite.getPosition().x + candySprite.getScale().x < 0)
         {
-//            int max=500;
-//            int min=25;
-//            int randomValue=std::rand()/(float)RAND_MAX*(max-min)+min;
+            candyMoveSpeed=randCandySpeed();
             //If so, move it back to edge 800.
             candySprite.setPosition(800.0f, randCandyPos());
+            
         }
 
     }

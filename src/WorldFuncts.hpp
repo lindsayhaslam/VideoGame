@@ -24,8 +24,8 @@ class World
 {
 public:
     //RECTANGLE VARIABLES
-    float moveSpeed=0;
-    float candyMoveSpeed=0;
+    float moveSpeed= 0.04;
+    float candyMoveSpeed=0.01;
     int candyPos;
     int numRectangles=1;
     int numCandies=1;
@@ -34,10 +34,8 @@ public:
     sf::Texture candyTexture;
     sf::Sprite candySprite;
     bool playerDead=false;
-    //sf::RectangleShape rectangles[numRectangles];
     Player player;
-//    Score score;
-//    sf::RectangleShape road;
+
     
     //Initialize rectangles with different initial positions
     void initialize();
@@ -66,15 +64,17 @@ public:
     
     float randCandySpeed()
     {
-        float max = 0.10;
-        float min =0.001;
-        float randomSpeed=std::rand()/(float)RAND_MAX*(max-min)+min;
-        return randomSpeed;
+        return randomizeSpeed(.01, .1);
     }
     
     float randBuildingSpeed()
-    {   float max = 0.08;
-        float min =0.03;
+    {
+        return randomizeSpeed(.05, .08);
+        
+    }
+    
+    float randomizeSpeed(float min, float max)
+    {
         float randomSpeed=std::rand()/(float)RAND_MAX*(max-min)+min;
         return randomSpeed;
         
