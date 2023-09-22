@@ -8,23 +8,34 @@
 
 void Player::initialize()
 {
-    if (!purpleTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino.png")) {
+    //Load files into their respectuive textures
+    //Purple dino
+    if (!purpleTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Dino.png")) {
         std::cerr << "Failed to load playerTexture" << std::endl;
         exit(1);
     }
-    if (!orangeTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino1.png")) {
+    
+    //Orange dino
+    if (!orangeTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Dino1.png")) {
         std::cerr << "Failed to load orangeTexture" << std::endl;
         exit(1);
     }
-    if (!greenTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino2.png")) {
+    
+    //Green dino
+    if (!greenTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Dino2.png")) {
         std::cerr << "Failed to load greenTexture" << std::endl;
         exit(1);
     }
     else {
+    //Push back different textures into playerTextures vector
     playerTextures.push_back(purpleTexture);
     playerTextures.push_back(orangeTexture);
     playerTextures.push_back(greenTexture);
+    
+    //Set playerSprite texture to [[0]
     playerSprite.setTexture(playerTextures[0]);
+        
+    //Default settings
     isJumping = false;
     jumpHeight = 475.0f;
     gravity = .9f;
@@ -39,10 +50,10 @@ void Player::initialize()
 
 void Player::update()
     {
-        // Check if the sprite is on the ground
+        // Check if the sprite is on the ground by its "y" position
     bool isOnGround = (playerSprite.getPosition().y >= 480.f);
 
-        // JUMP
+        // Jump when spacebar is pressed
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isJumping && isOnGround)
         {
             // Set isJumping to true
@@ -56,6 +67,7 @@ void Player::update()
             playerSprite.move(0.f, -gravity);
             jumpHeight -= gravity;
 
+            //When jumpHeight is less than or equal to zero, player is not jumping
             if (jumpHeight <= 0)
             {
                 isJumping = false;
@@ -83,6 +95,7 @@ void Player::draw(sf::RenderWindow& window)
     window.draw(playerSprite);
 }
 
+//Collision deteection
 bool Player::doesCollide(sf::FloatRect otherRect)
 {
     

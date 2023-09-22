@@ -19,21 +19,22 @@ class Player
 {
 public:
     //PLAYER
-    sf::Texture purpleTexture;
     sf::Sprite playerSprite;
+    
     //Jump variables
     bool isJumping;
     float jumpHeight;
     float gravity;
     
-    std::vector<sf::Texture> playerTextures;
-    int currentTextureIndex = 0;
+    //Textures for colors
+    sf::Texture purpleTexture;
     sf::Texture orangeTexture;
     sf::Texture greenTexture;
+    std::vector<sf::Texture> playerTextures;
+    int currentTextureIndex = 0;
+   
     
     void initialize();
-    
-    
     void update();
     void colorUpdate();
     
@@ -41,8 +42,7 @@ public:
     void draw(sf::RenderWindow& window);
     void colorDraw();
     
-    
-    
+    //For collision
     bool doesCollide(sf::FloatRect otherRect);
     void doesCollideCandy(Player& player); 
     

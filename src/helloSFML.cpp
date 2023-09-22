@@ -6,6 +6,7 @@
 #include "PlayerFuncts.hpp"
 #include "ScoreFuncts.hpp"
 #include "WorldFuncts.hpp"
+#include "TestFuncts.hpp"
 
 
 int main()
@@ -14,12 +15,15 @@ int main()
     World world;
     Player player;
     
+    gameTests();
+    
         
     // create the window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dinoskater!");
     
     bool isGameOver = false;
     
+    //Gradient Background
     sf::VertexArray gradient(sf::Quads, 4);
 
         // Define the colors for the gradient
@@ -27,19 +31,19 @@ int main()
         gradient[1].position = sf::Vector2f(800, 0);
         gradient[2].position = sf::Vector2f(800, 600);
         gradient[3].position = sf::Vector2f(0, 600);
+    
+        //Determine colors of the gradient
+        gradient[0].color = sf::Color(135, 206, 250); // Sky Blue
+        gradient[1].color = sf::Color(135, 206, 250); // Sky Blue
+        gradient[2].color = sf::Color::White; // Light Sky Blue
+        gradient[3].color = sf::Color::White; // Light Sky Blue
 
-
-        gradient[0].color = sf::Color(173, 216, 230);
-        gradient[1].color = sf::Color(173, 216, 230);
-        gradient[2].color = sf::Color::White;
-        gradient[3].color = sf::Color::White;
-
-
-    world.initialize();
-    world.initializeCandy();
-    score.initialize();
-    score.initializeGameOverFont();
-    auto lastUpdateTick = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
+        //Call initialize methods for all parts of the game
+        world.initialize();
+        world.initializeCandy();
+        score.initialize();
+        score.initializeGameOverFont();
+        auto lastUpdateTick = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
 
     
     
@@ -62,6 +66,7 @@ int main()
         int deltaTimeMS = (nowMS - lastUpdateTick).count();
         lastUpdateTick = nowMS;
 
+        //Used for buildings, candy, score
         world.update(deltaTimeMS);
         if (world.updateCandy(deltaTimeMS)){
             world.initializeCandy();
@@ -70,6 +75,7 @@ int main()
         
         score.update(deltaTimeMS);
         
+        //If player dies logic
          if (world.isPlayerDead())
         {
             score.drawGameOverText(window);
@@ -82,6 +88,7 @@ int main()
                 sf::Event event;
                 while (isGameOver)
                 {
+                    //Pauses the game
                     if(window.pollEvent(event))
                     {
                     if (event.type == sf::Event::Closed)
@@ -89,31 +96,34 @@ int main()
                         window.close();
                         return 0;
                     }
-
+                    //Detects for and allows shift button to restart game
                     if (event.type == sf::Event::KeyPressed)
                     {
                         if (event.key.code == sf::Keyboard::RShift || event.key.code ==sf::Keyboard::LShift)
                         {
-
-                            isGameOver = false; // Resume the game
+                            // Resume the game
+                            isGameOver = false;
                             
                         }
                     }
                 }
             }
+            //Reinitialize after the game over
             world.initialize();
             world.initializeCandy();
             score.initialize();
             score.initializeGameOverFont();
         }
         
-        // clear the window with white color
+        // Clear window
         window.clear();
-        
+        //Call draw for gradient
         window.draw(gradient);
-
+        //Draw eindow
         world.draw(window);
-        world.drawCandy(window); 
+        //Call drawCandy
+        world.drawCandy(window);
+        //Draw score
         score.draw(window);
         
         window.display();

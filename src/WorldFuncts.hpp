@@ -22,36 +22,43 @@
 
 class World
 {
-private:
-    //Yum! Sprites
-    sf::Texture candyCollectTexture;
-    sf::Sprite candyCollectedSprite; // New sprite for displaying collected candy
-    bool displayCandyCollected = false; // Flag to control the display
-    sf::Clock candyCollectedTimer; // Timer to track the display duration
-    const sf::Time displayDuration = sf::seconds(4.0f); // Duration in seconds for displaying the candy
-    
 public:
+    
+    //YUM VARIABLES
+    sf::Texture candyCollectTexture;
+    // New sprite for displaying collected candy
+    sf::Sprite candyCollectedSprite;
+    // Flag to control the display
+    bool displayCandyCollected = false;
+    // Timer to track the display duration
+    sf::Clock candyCollectedTimer;
+    // Duration in seconds for displaying the candy
+    const sf::Time displayDuration = sf::seconds(4.0f);
+    
     //RECTANGLE VARIABLES
     float moveSpeed= 0.04;
-    float candyMoveSpeed=0.01;
-    int candyPos;
     int numRectangles=1;
-    int numCandies=1;
     sf::Texture buildingTexture;
     sf::Sprite buildingSprite;
+    //For the ground
+    sf::RectangleShape groundRect;
+    
+    //CANDY VARIABLES
+    int candyPos;
+    float candyMoveSpeed=0.01;
+    int numCandies=1;
     sf::Texture candyTexture;
     sf::Sprite candySprite;
+    
+    //PLAYER
     bool playerDead=false;
     Player player;
 
     
-    //Initialize rectangles with different initial positions
     void initialize();
     
     void initializeCandy(); 
 
-    //RECTANGLES
-          //Move and draw the rectangles
     void update (int deltatime);
     
     bool updateCandy (int deltatime); 
@@ -77,7 +84,7 @@ public:
     
     float randBuildingSpeed()
     {
-        return randomizeSpeed(.058, .070);
+        return randomizeSpeed(.045, .075);
         
     }
     
@@ -87,6 +94,7 @@ public:
         return randomSpeed;
         
     }
+    
     
     
     

@@ -15,9 +15,12 @@
 class Score
 {
 public:
+    //For game over and score text
     sf::Text scoreText;
     sf::Text gameOverText;
     sf::Font font;
+    
+    //For points
     int points=0;
     int numTicksSinceLastPoint = 0;
     const int numTicksPerPoint = 1000;
