@@ -22,6 +22,14 @@
 
 class World
 {
+private:
+    //Yum! Sprites
+    sf::Texture candyCollectTexture;
+    sf::Sprite candyCollectedSprite; // New sprite for displaying collected candy
+    bool displayCandyCollected = false; // Flag to control the display
+    sf::Clock candyCollectedTimer; // Timer to track the display duration
+    const sf::Time displayDuration = sf::seconds(4.0f); // Duration in seconds for displaying the candy
+    
 public:
     //RECTANGLE VARIABLES
     float moveSpeed= 0.04;

@@ -26,6 +26,16 @@ void World::initialize(){
     }
     player.initialize();
     playerDead=false;
+    
+    //YUM!
+        if (!candyCollectTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Yum.png"))
+        {
+            exit(0);
+        }
+        else
+        {
+            candyCollectedSprite.setTexture(candyCollectTexture);
+        }
 }
 
 void World::initializeCandy(){
@@ -92,6 +102,19 @@ bool World::updateCandy (int deltatime)
         
         player.currentTextureIndex = (player.currentTextureIndex + 1) % player.playerTextures.size();
         player.playerSprite.setTexture(player.playerTextures[player.currentTextureIndex]);
+        
+        
+        //YUM!
+        candyCollectedSprite.setTexture(candyCollectTexture);
+        candyCollectedSprite.setPosition(player.playerSprite.getPosition());
+        displayCandyCollected = true;
+        candyCollectedTimer.restart();
+        
+        // YUM! Check if it's time to hide the candy collected sprite
+        if (displayCandyCollected && candyCollectedTimer.getElapsedTime() >= displayDuration)
+        {
+                displayCandyCollected = false;
+        }
         return true;
     }
     return false;
@@ -108,9 +131,16 @@ void World::draw(sf::RenderWindow& window)
 
 void World::drawCandy(sf::RenderWindow& window)
     {
-        for (int i=0; i<numCandies; ++i) {
+        for (int i=0; i<numCandies; ++i)
+        {
             //draw rectangle along the way
             window.draw(candySprite);
+        }
+    //Draw YUM!
+        if (displayCandyCollected)
+        {
+            window.draw(candyCollectedSprite);// Draw the candy collected sprite
+            candyCollectedSprite.move(0.05f, -player.gravity);
         }
 
     }
