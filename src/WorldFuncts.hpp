@@ -24,8 +24,8 @@ class World
 {
 public:
     //RECTANGLE VARIABLES
-    float moveSpeed;
-    float candyMoveSpeed;
+    float moveSpeed=0;
+    float candyMoveSpeed=0;
     int candyPos;
     int numRectangles=1;
     int numCandies=1;

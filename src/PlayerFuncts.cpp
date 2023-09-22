@@ -4,9 +4,7 @@
 //
 //  Created by Corinne Jones on 9/19/23.
 //
-
 #include "PlayerFuncts.hpp"
-
 
 void Player::initialize()
 {
@@ -14,12 +12,10 @@ void Player::initialize()
         std::cerr << "Failed to load playerTexture" << std::endl;
         exit(1);
     }
-
     if (!orangeTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino1.png")) {
         std::cerr << "Failed to load orangeTexture" << std::endl;
         exit(1);
     }
-
     if (!greenTexture.loadFromFile("/Users/corinnejones/VideoGame/build/Dino2.png")) {
         std::cerr << "Failed to load greenTexture" << std::endl;
         exit(1);
@@ -44,7 +40,7 @@ void Player::initialize()
 void Player::update()
     {
         // Check if the sprite is on the ground
-        bool isOnGround = (playerSprite.getPosition().y >= 480.f);
+    bool isOnGround = (playerSprite.getPosition().y >= 480.f);
 
         // JUMP
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isJumping && isOnGround)
