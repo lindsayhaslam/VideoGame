@@ -67,7 +67,7 @@ void World::update (int deltatime)
         //Check to see if rectangle has moved off screen
         if (buildingSprite.getPosition().x + buildingSprite.getScale().x < 0)
         {
-            moveSpeed=randCandySpeed();
+            moveSpeed=randBuildingSpeed();
             //If so, move it back to edge 800.
             buildingSprite.setPosition(800.f, 437.f);
         }

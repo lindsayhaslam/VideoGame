@@ -27,8 +27,8 @@ void Player::initialize()
     playerSprite.setTexture(playerTextures[0]);
     isJumping = false;
     jumpHeight = 475.0f;
-    gravity = .4f;
-    playerSprite.setPosition(250.f, 480.f);
+    gravity = .9f;
+    playerSprite.setPosition(200.f, 480.f);
     playerSprite.setScale(0.4f, 0.4f);
  
         
@@ -59,8 +59,8 @@ void Player::update()
             if (jumpHeight <= 0)
             {
                 isJumping = false;
-                jumpHeight = 475.0f;
-                gravity = 0.08f;
+                jumpHeight = 480.0f;
+                gravity = 0.075f;
             }
         }
         else if (!isOnGround)

@@ -72,12 +72,12 @@ public:
     
     float randCandySpeed()
     {
-        return randomizeSpeed(.01, .1);
+        return randomizeSpeed(.03, .11);
     }
     
     float randBuildingSpeed()
     {
-        return randomizeSpeed(.05, .08);
+        return randomizeSpeed(.058, .070);
         
     }
     
