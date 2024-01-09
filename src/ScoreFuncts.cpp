@@ -11,7 +11,7 @@
 void Score::initialize()
 {
     //Load font
-    if (!font.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/SuperBoom.TTF"))
+    if (!font.loadFromFile("/Users/corinnejones/VideoGame/art/SuperBoom.TTF"))
     {
         exit(0);
     }

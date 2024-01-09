@@ -21,7 +21,7 @@ void  testScoreInitialize()
     score.initialize();
 
     // Test if font is loaded
-    if (!score.font.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/SuperBoom.TTF")) {
+    if (!score.font.loadFromFile("/Users/corinnejones/VideoGame/art/SuperBoom.TTF")) {
         std::cout << "Font failed to load." << std::endl;
     }
 
@@ -98,7 +98,7 @@ void testCollision()
 
     // Set up playerSprite position and size
     sf::Texture playerTexture;
-    playerTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Dino1.png");
+    playerTexture.loadFromFile("/Users/corinnejones/VideoGame/art/Dino1.png");
     player.playerSprite.setTexture(playerTexture);
     player.playerSprite.setPosition(100.f, 100.f);
     player.playerSprite.setScale(0.5f, 0.5f);
