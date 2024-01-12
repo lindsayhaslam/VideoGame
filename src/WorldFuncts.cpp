@@ -18,7 +18,7 @@ void World::initialize(){
     std::srand(std::time(nullptr));
     
     //Load in Building.png to a texture and then assign it to a sprite
-    if (!buildingTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Building.png"))
+    if (!buildingTexture.loadFromFile("../art/Building.png"))
     {
     exit(0);
     }
@@ -37,7 +37,7 @@ void World::initialize(){
     playerDead=false;
     
     //Load in "Yum" for candyCollectTexture and then assign it to candyCollectedSprite sprite
-    if (!candyCollectTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Yum.png"))
+    if (!candyCollectTexture.loadFromFile("../art/Yum.png"))
     {
         exit(0);
     }
@@ -49,7 +49,7 @@ void World::initialize(){
 
 void World::initializeCandy(){
     //Load in Candy.png for candyTexture and then assign it to candySprite
-    if (!candyTexture.loadFromFile("/Users/lindsayhaslam/LindsayCorinneFinalProject/VideoGame/build/Candy.png"))
+    if (!candyTexture.loadFromFile("../art/Candy.png"))
     {
     exit(0);
     }
