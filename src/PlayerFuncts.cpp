@@ -10,19 +10,19 @@ void Player::initialize()
 {
     //Load files into their respectuive textures
     //Purple dino
-    if (!purpleTexture.loadFromFile("/Users/corinnejones/VideoGame/art/Dino.png")) {
+    if (!purpleTexture.loadFromFile("../art/Dino.png")) {
         std::cerr << "Failed to load playerTexture" << std::endl;
         exit(1);
     }
     
     //Orange dino
-    if (!orangeTexture.loadFromFile("/Users/corinnejones/VideoGame/art/Dino1.png")) {
+    if (!orangeTexture.loadFromFile("../art/Dino1.png")) {
         std::cerr << "Failed to load orangeTexture" << std::endl;
         exit(1);
     }
     
     //Green dino
-    if (!greenTexture.loadFromFile("/Users/corinnejones/VideoGame/art/Dino2.png")) {
+    if (!greenTexture.loadFromFile("../art/Dino2.png")) {
         std::cerr << "Failed to load greenTexture" << std::endl;
         exit(1);
     }
